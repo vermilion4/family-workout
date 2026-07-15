@@ -1,4 +1,4 @@
-export type TaskKind = 'core' | 'floor' | 'cardio' | 'rest' | 'other';
+export type TaskKind = 'core' | 'floor' | 'cardio' | 'strength' | 'rest' | 'other';
 
 export interface Task {
   id: string;

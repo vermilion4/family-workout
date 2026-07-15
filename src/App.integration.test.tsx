@@ -67,9 +67,19 @@ test('canceling the start-date edit leaves the plan unchanged', async () => {
 test('switching people keeps progress separate', async () => {
   const user = userEvent.setup();
   render(<App />);
-  await user.click(screen.getByRole('button', { name: /mummy/i }));
+  await user.click(screen.getByRole('button', { name: /grandma/i }));
   await user.click(screen.getByRole('button', { name: /start my plan/i }));
-  // Mummy is a stub -> coming soon state, no checkboxes
+  // Grandma is still a stub -> coming soon state, no checkboxes
   expect(screen.getByText(/coming soon/i)).toBeInTheDocument();
   expect(screen.queryAllByRole('checkbox')).toHaveLength(0);
+});
+
+test("Mummy's plan is authored: picking Mummy shows a real workout with checkboxes", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+  await user.click(screen.getByRole('button', { name: /mummy/i }));
+  await user.click(screen.getByRole('button', { name: /start my plan/i }));
+  // Mummy is now authored -> a real Day 1 workout, not the "coming soon" stub
+  expect(screen.queryByText(/coming soon/i)).not.toBeInTheDocument();
+  expect(screen.getAllByRole('checkbox').length).toBeGreaterThan(0);
 });
