@@ -21,6 +21,9 @@ export const EXERCISES: Record<string, Move> = {
   'gentle-stretch': { name: 'Gentle Stretch', how: 'Slow, easy stretches for your legs, back, shoulders and neck. Never bounce and never stretch into pain — just an easy, comfortable pull, breathing throughout.' },
   'breathing': { name: 'Easy Breathing', how: 'Sit or stand tall. Breathe in slowly through your nose and feel your ribs widen; breathe out gently and slowly. A calm way to wake up your deep core with no strain at all.' },
   'gentle-crunch': { name: 'Gentle Assisted Crunch', how: 'Sit on the Wonder Core with your back fully supported and let the springs do the work. Curl up only a small, comfortable amount as you breathe out — slow and controlled. Keep it light, and STOP right away if you feel any tummy pain or pulling.' },
+  'sit-to-stand': { name: 'Sit-to-Stand', how: 'Sit tall on a sturdy chair, feet flat and hip-width. Stand up using your legs — use your hands on the chair or your thighs only if you need to — then sit back down slowly with control. The best move for strong legs and getting up with ease.' },
+  'balance-work': { name: 'Balance Work', how: 'Stand tall next to your chair or a wall for safety. Balance on one foot for a few seconds, then switch; or walk heel-to-toe in a straight line like on a tightrope. Rest a hand on the chair whenever you need — this builds the steadiness that keeps you independent.' },
+  'standing-twist': { name: 'Standing Twist', how: 'Stand tall with feet planted, hands at your chest or reaching in front. Gently rotate your upper body to one side, then the other — slow and controlled, only as far as is comfortable. Wakes up your waist with no floor work.' },
 };
 
 export function getMove(ref?: string): Move | undefined {

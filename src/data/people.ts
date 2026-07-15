@@ -1,7 +1,7 @@
 import type { Plan, Day } from './types';
 import { adyPlan } from './ady';
 import { mummyPlan } from './mummy';
-import { stubPlan } from './stubs';
+import { grandmaPlan } from './grandma';
 
 export interface Person {
   id: string;
@@ -12,7 +12,7 @@ export interface Person {
 export const PEOPLE: Person[] = [
   { id: 'ady', displayName: 'Ady', plan: adyPlan },
   { id: 'mummy', displayName: 'Mummy', plan: mummyPlan },
-  { id: 'grandma', displayName: 'Grandma', plan: stubPlan('grandma') },
+  { id: 'grandma', displayName: 'Grandma', plan: grandmaPlan },
 ];
 
 export function getPerson(id: string): Person | undefined {

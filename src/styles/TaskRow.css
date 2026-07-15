@@ -3,6 +3,7 @@
 .task--floor { --k: var(--floor); }
 .task--cardio { --k: var(--cardio); }
 .task--strength { --k: var(--strength); }
+.task--balance { --k: var(--balance); }
 .task--rest, .task--other { --k: var(--text-mute); }
 
 .task__box {
@@ -62,6 +63,7 @@
   color: var(--k);
 }
 .task__tag--strength { color: var(--strength); }
+.task__tag--balance { color: var(--balance); }
 .task__label { font-size: 1.04rem; font-weight: 600; line-height: 1.3; }
 .task.is-done .task__label { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--text-mute); }
 

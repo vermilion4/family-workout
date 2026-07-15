@@ -5,7 +5,7 @@ import { ExerciseInfo } from './ExerciseInfo';
 import '../styles/TaskRow.css';
 
 export const KIND_LABEL: Record<TaskKind, string> = {
-  core: 'Core', floor: 'Floor', cardio: 'Cardio', strength: 'Strength', rest: 'Rest', other: 'Prep',
+  core: 'Core', floor: 'Floor', cardio: 'Cardio', strength: 'Strength', balance: 'Balance', rest: 'Rest', other: 'Prep',
 };
 
 export function TaskRow({

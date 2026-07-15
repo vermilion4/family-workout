@@ -67,11 +67,41 @@ test('canceling the start-date edit leaves the plan unchanged', async () => {
 test('switching people keeps progress separate', async () => {
   const user = userEvent.setup();
   render(<App />);
+
+  // Pick Mummy, confirm start date, tick her first checkbox.
+  await user.click(screen.getByRole('button', { name: /mummy/i }));
+  await user.click(screen.getByRole('button', { name: /start my plan/i }));
+  const mummyBoxes = screen.getAllByRole('checkbox');
+  expect(mummyBoxes.length).toBeGreaterThan(0);
+  await user.click(mummyBoxes[0]);
+  expect(mummyBoxes[0]).toHaveAttribute('aria-checked', 'true');
+
+  // Use the header person switcher (the "Mummy ▾" button, aria-label "Switch
+  // person", which calls clearPerson) to go back to the picker.
+  await user.click(screen.getByRole('button', { name: /switch person/i }));
+
+  // Pick Grandma, confirm start date.
   await user.click(screen.getByRole('button', { name: /grandma/i }));
   await user.click(screen.getByRole('button', { name: /start my plan/i }));
-  // Grandma is still a stub -> coming soon state, no checkboxes
-  expect(screen.getByText(/coming soon/i)).toBeInTheDocument();
-  expect(screen.queryAllByRole('checkbox')).toHaveLength(0);
+
+  // Grandma is now fully authored -> a real Today workout, no "coming soon",
+  // and none of her checkboxes are checked yet.
+  expect(screen.queryByText(/coming soon/i)).not.toBeInTheDocument();
+  const grandmaBoxes = screen.getAllByRole('checkbox');
+  expect(grandmaBoxes.length).toBeGreaterThan(0);
+  expect(screen.queryByTestId('day-complete')).not.toBeInTheDocument();
+  expect(grandmaBoxes[0]).toHaveAttribute('aria-checked', 'false');
+
+  // Progress is stored under separate per-person localStorage keys, and only
+  // Mummy's has a checked task.
+  const mummyRaw = localStorage.getItem('fw:v1:progress:mummy');
+  const grandmaRaw = localStorage.getItem('fw:v1:progress:grandma');
+  expect(mummyRaw).not.toBeNull();
+  expect(grandmaRaw).not.toBeNull();
+  const mummyProgress = JSON.parse(mummyRaw!);
+  const grandmaProgress = JSON.parse(grandmaRaw!);
+  expect(Object.keys(mummyProgress.checked).length).toBeGreaterThan(0);
+  expect(Object.keys(grandmaProgress.checked).length).toBe(0);
 });
 
 test("Mummy's plan is authored: picking Mummy shows a real workout with checkboxes", async () => {

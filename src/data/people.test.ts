@@ -5,26 +5,14 @@ test('three people in order with correct names/ids', () => {
   expect(PEOPLE.map((p) => p.displayName)).toEqual(['Ady', 'Mummy', 'Grandma']);
 });
 
-test('Ady plan is authored with 90 days across 3 phases', () => {
-  const ady = getPerson('ady')!;
-  expect(ady.plan.authored).toBe(true);
-  expect(ady.plan.totalDays).toBe(90);
-  const totalDays = ady.plan.phases.reduce((s, ph) => s + ph.days.length, 0);
-  expect(totalDays).toBe(90);
-});
-
-test('stub plans are unauthored but still 90 days for the calendar', () => {
-  const grandma = getPerson('grandma')!;
-  expect(grandma.plan.authored).toBe(false);
-  expect(grandma.plan.phases.reduce((s, ph) => s + ph.days.length, 0)).toBe(90);
-});
-
-test('Mummy plan is authored with 90 days across 3 phases', () => {
-  const mummy = getPerson('mummy')!;
-  expect(mummy.plan.authored).toBe(true);
-  expect(mummy.plan.totalDays).toBe(90);
-  const totalDays = mummy.plan.phases.reduce((s, ph) => s + ph.days.length, 0);
-  expect(totalDays).toBe(90);
+test('all three people are authored with 90 days across 3 phases', () => {
+  for (const person of PEOPLE) {
+    expect(person.plan.authored).toBe(true);
+    expect(person.plan.totalDays).toBe(90);
+    expect(person.plan.phases).toHaveLength(3);
+    const totalDays = person.plan.phases.reduce((s, ph) => s + ph.days.length, 0);
+    expect(totalDays).toBe(90);
+  }
 });
 
 test('getDay finds a day across phases', () => {
