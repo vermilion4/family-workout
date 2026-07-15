@@ -31,7 +31,12 @@ per-task gate; milestone + final reviews cover quality.
 - D10 (Task 18): complete — bold visual + a11y polish (radial glow, hero ring, check-pop, calendar legend/progress bar, focus-visible); content retag of day 30/60/90 "Compare to..." notes -> kind other. Tests 47/47, build clean. (staged)
   - Known tradeoff: 7-wide calendar cells are ~40px at 320px width (45px at 390px), slightly under the 44px target only on the narrowest phones. Accepted.
 
-## ALL 18 TASKS COMPLETE. Remaining: final whole-app review, live verify, finish.
+## ALL 18 TASKS COMPLETE.
+- Final review: 0 Critical, 2 Important, 4 Minor. Fix round 1 addressed ALL of them.
+  - Editable start date (spec 6.2), real month-style calendar with dates (spec 6.4), Day N of 90 hero, dead-prop, etc.
+- Final state: tests 50/50 green, `npm run build` clean, PWA emits sw.js + manifest, no require() in src.
+- Live-verified via screenshots (.superpowers/sdd/*-shots): picker, today, month calendar, edit-start all render correctly and on-brand.
+- Remaining: finish/handoff. (commits still disabled — user commits + deploys.)
 
 ## Minor findings (for final review / polish)
 - Day 30/60/90 "test day" note segments (e.g. "Compare to Day 1: longest plank hold & max crunches...") mechanically got kind=floor/moveRef=plank via the keyword rule. They are notes, not exercises. Consider retagging those specific segments to kind 'other' (no moveRef) in D10 polish.
