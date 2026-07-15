@@ -113,3 +113,17 @@ test("Mummy's plan is authored: picking Mummy shows a real workout with checkbox
   expect(screen.queryByText(/coming soon/i)).not.toBeInTheDocument();
   expect(screen.getAllByRole('checkbox').length).toBeGreaterThan(0);
 });
+
+test('picking Ady and opening the Meals nav shows her weekly meal plan', async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  await user.click(screen.getByRole('button', { name: /ady/i }));
+  await user.click(screen.getByRole('button', { name: /start my plan/i }));
+
+  await user.click(screen.getByRole('button', { name: /meals/i }));
+
+  // Food-matters banner + a known day of the week prove the meal plan rendered.
+  expect(screen.getByText(/60%/)).toBeInTheDocument();
+  expect(screen.getByText('Monday')).toBeInTheDocument();
+});

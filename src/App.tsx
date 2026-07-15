@@ -7,12 +7,14 @@ import { StartDatePicker } from './components/StartDatePicker';
 import { TodayView } from './components/TodayView';
 import { CalendarView } from './components/CalendarView';
 import { DayView } from './components/DayView';
+import { MealsView } from './components/MealsView';
 import { phaseNameForDay } from './components/TodayView';
 import { getDay } from './data/people';
+import { getMealPlan } from './data/meals';
 import { loadProgress, setStartDate, toggleTask } from './state/progress';
-import { todayISO, dayForDate } from './state/dates';
+import { todayISO, dayForDate, parseISO } from './state/dates';
 
-type View = 'today' | 'calendar' | 'day';
+type View = 'today' | 'calendar' | 'day' | 'meals';
 
 function Shell() {
   const { person, selectPerson, clearPerson, bump } = usePerson();
@@ -26,6 +28,7 @@ function Shell() {
   // re-reads the latest saved progress from localStorage.
   const progress = loadProgress(person.id);
   const today = todayISO();
+  const todayWeekday = parseISO(today).toLocaleDateString(undefined, { weekday: 'long' });
 
   if (!progress.startDateISO) {
     return (
@@ -53,7 +56,8 @@ function Shell() {
     bump();
   };
 
-  const navView: 'today' | 'calendar' = view === 'calendar' ? 'calendar' : 'today';
+  const navView: 'today' | 'calendar' | 'meals' =
+    view === 'calendar' || view === 'meals' ? view : 'today';
 
   return (
     <div>
@@ -83,6 +87,9 @@ function Shell() {
           todayISO={today}
           onPickDay={(n) => { setSelectedDay(n); setView('day'); }}
         />
+      )}
+      {view === 'meals' && (
+        <MealsView plan={getMealPlan(person.id)!} todayWeekday={todayWeekday} />
       )}
       {view === 'day' && selectedDay !== null && (
         <div style={{ maxWidth: 620, margin: '0 auto', padding: '8px 16px' }}>

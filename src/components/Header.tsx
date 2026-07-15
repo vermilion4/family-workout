@@ -8,8 +8,8 @@ export function Header({
   onEditStart,
 }: {
   name: string;
-  view: 'today' | 'calendar';
-  onNav: (v: 'today' | 'calendar') => void;
+  view: 'today' | 'calendar' | 'meals';
+  onNav: (v: 'today' | 'calendar' | 'meals') => void;
   onSwitch: () => void;
   onEditStart: () => void;
 }) {
@@ -25,6 +25,9 @@ export function Header({
           </button>
           <button className={view === 'calendar' ? 'is-active' : ''} onClick={() => onNav('calendar')}>
             Calendar
+          </button>
+          <button className={view === 'meals' ? 'is-active' : ''} onClick={() => onNav('meals')}>
+            Meals
           </button>
         </nav>
         <button className="hdr__settings" onClick={onEditStart} title="Change start date">

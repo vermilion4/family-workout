@@ -1,0 +1,129 @@
+.meals { max-width: 720px; margin: 0 auto; padding: 18px 16px 56px; }
+
+.meals__banner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: var(--surface-grad);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  margin-bottom: 16px;
+}
+.meals__bannericon { font-size: 1.4rem; line-height: 1; }
+.meals__banner p { margin: 0; font-weight: 700; color: var(--text); line-height: 1.5; }
+
+.meals__intro { color: var(--text-dim); font-size: .98rem; line-height: 1.55; margin: 0 0 16px; }
+
+.meals__principles {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+.meals__principles summary {
+  cursor: pointer;
+  padding: 13px 0;
+  font-weight: 800;
+  color: var(--text);
+  list-style: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.meals__principles summary::-webkit-details-marker { display: none; }
+.meals__principles summary::before { content: '▸'; color: var(--accent); margin-right: 8px; }
+.meals__principles[open] summary::before { content: '▾'; }
+.meals__principles ul { margin: 0; padding: 0 0 14px 18px; color: var(--text-dim); font-size: .92rem; line-height: 1.6; }
+.meals__principles li { margin-bottom: 6px; }
+
+.meals__week { display: flex; flex-direction: column; gap: 16px; }
+
+.meals__day {
+  --supper: #818cf8;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-1);
+}
+.meals__day--today {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent) inset, var(--glow-accent);
+}
+
+.meals__daytop { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.meals__dayname { margin: 0; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.01em; }
+.meals__todaybadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-grad);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  box-shadow: var(--glow-accent);
+}
+
+.meals__fasting {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin: 6px 0 14px;
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface-2));
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+  border-radius: var(--radius-sm);
+}
+.meals__fastingbadge {
+  display: inline-flex;
+  flex: none;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-grad);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.meals__fastingnote { margin: 0; color: var(--text-dim); font-size: .88rem; line-height: 1.5; flex: 1 1 220px; }
+
+.meals__slot { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line-soft); }
+.meals__slot:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+.meals__slotlabel { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; font-size: .98rem; font-weight: 800; }
+.meals__sloticon { font-size: 1.05rem; }
+.meals__slot--breakfast .meals__slotlabel { color: var(--cardio); }
+.meals__slot--lunch .meals__slotlabel { color: var(--accent); }
+.meals__slot--supper .meals__slotlabel { color: var(--supper, #818cf8); }
+.meals__hint { margin: 0 0 8px; color: var(--text-mute); font-size: .78rem; font-style: italic; }
+.meals__options { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.meals__chip {
+  padding: 8px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: .88rem;
+  line-height: 1.4;
+}
+
+.meals__disclaimer {
+  margin-top: 24px;
+  padding-top: 14px;
+  color: var(--text-mute);
+  font-size: .8rem;
+  line-height: 1.5;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 360px) {
+  .meals { padding: 16px 12px 48px; }
+  .meals__day { padding: 14px; }
+  .meals__banner { padding: 14px; }
+}
