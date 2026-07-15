@@ -1,0 +1,150 @@
+.cal { max-width: 640px; margin: 0 auto; padding: 18px 16px 48px; }
+
+.cal__summary {
+  padding: 16px 18px;
+  background: var(--surface-grad);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-1);
+}
+.cal__summaryrow { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.cal__summary strong { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; }
+.cal__summary span { color: var(--text-dim); font-weight: 600; }
+.cal__bar {
+  margin-top: 12px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.cal__barfill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--accent-grad);
+  box-shadow: var(--glow-accent);
+  transition: width .6s cubic-bezier(.3,.9,.3,1);
+}
+
+.cal__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.cal__legend--phases { margin-bottom: 24px; }
+.cal__key { display: inline-flex; align-items: center; gap: 7px; }
+.cal__keymark {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: .7rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.cal__key--done .cal__keymark { background: var(--success); border-color: var(--success); color: var(--ink-green); }
+.cal__key--today .cal__keymark { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; }
+.cal__key--missed .cal__keymark { opacity: .45; }
+.cal__key--rest .cal__keymark { color: var(--accent); font-size: 1.1rem; }
+
+/* Phase "heat ramp": the plan visibly warms up Foundation -> Momentum -> Peak. */
+.cal__swatch { width: 18px; height: 7px; flex: none; border-radius: 3px; background: var(--text-mute); }
+.cal__phasekey[data-phase="1"] .cal__swatch { background: var(--cardio); }
+.cal__phasekey[data-phase="2"] .cal__swatch { background: var(--accent); }
+.cal__phasekey[data-phase="3"] .cal__swatch { background: var(--accent-deep); }
+
+.cal__month { margin-bottom: 26px; }
+.cal__monthlabel {
+  margin: 0 0 12px;
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.cal__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 7px;
+  margin-bottom: 7px;
+}
+.cal__weekdays span {
+  text-align: center;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--text-mute);
+}
+
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; }
+.cal__blank { aspect-ratio: 1; }
+.cal__cell {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-dim);
+  font-size: .98rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .1s ease, border-color .12s ease;
+}
+/* Phase spine: a quiet tinted bar along the bottom edge, colored by phase. */
+.cal__cell[data-phase="1"] { --phase: var(--cardio); }
+.cal__cell[data-phase="2"] { --phase: var(--accent); }
+.cal__cell[data-phase="3"] { --phase: var(--accent-deep); }
+.cal__cell::before {
+  content: '';
+  position: absolute;
+  left: 24%;
+  right: 24%;
+  bottom: 5px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--phase, transparent);
+  opacity: .55;
+}
+.cal__cell:hover { border-color: var(--accent); transform: translateY(-1px); }
+.cal__cell[data-status="done"] {
+  background: var(--success-grad);
+  color: var(--ink-green);
+  border-color: var(--success);
+}
+.cal__cell[data-status="done"]::before { opacity: 0; }
+.cal__cell[data-status="done"]::after {
+  content: '✓';
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: .58rem;
+  font-weight: 900;
+  opacity: .85;
+}
+.cal__cell[data-status="today"] {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 0 2px var(--accent) inset, var(--glow-accent);
+}
+.cal__cell[data-status="missed"] { opacity: .5; }
+.cal__cell[data-status="missed"] .cal__n { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.cal__cell[data-rest] .cal__n::after { content: '·'; color: var(--accent); }
+.cal__cell[data-rest][data-status="done"] .cal__n::after { color: var(--ink-green); }
+
+.cal__note { text-align: center; color: var(--text-dim); padding: 48px 20px; }
+
+@media (max-width: 360px) {
+  .cal { padding: 16px 12px 40px; }
+  .cal__grid, .cal__weekdays { gap: 5px; }
+}

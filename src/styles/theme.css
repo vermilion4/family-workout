@@ -1,0 +1,76 @@
+:root {
+  --bg: #14161b;
+  --bg-2: #0f1116;
+  --surface: #1c1f27;
+  --surface-2: #242833;
+  --surface-hi: #2a2f3b;
+  --line: #2e3340;
+  --line-soft: #262b36;
+  --text: #f4f5f7;
+  --text-dim: #a3a9b8;
+  --text-mute: #7f8698;
+  --accent: #ff5a36;      /* coral */
+  --accent-soft: #ff7a5c;
+  --accent-deep: #e63e1c;
+  --ink: #1a0d08;         /* dark text for on-coral */
+  --success: #34d399;     /* done green */
+  --success-deep: #10b981;
+  --ink-green: #05261b;   /* dark text for on-green */
+  --core: #ff5a36;
+  --floor: #6ea8fe;
+  --cardio: #ffb020;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+  --tap: 48px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Depth & signature */
+  --accent-grad: linear-gradient(135deg, #ff7a3d 0%, #ff4d2e 55%, #f0371a 100%);
+  --success-grad: linear-gradient(135deg, #4ade9f 0%, #22c58a 100%);
+  --surface-grad: linear-gradient(180deg, #20242e 0%, #1a1d25 100%);
+  --shadow-1: 0 1px 0 rgba(255,255,255,.05) inset, 0 10px 26px rgba(0,0,0,.4);
+  --shadow-2: 0 1px 0 rgba(255,255,255,.06) inset, 0 16px 40px rgba(0,0,0,.5);
+  --glow-accent: 0 6px 22px rgba(255,90,54,.45);
+  --glow-green: 0 6px 24px rgba(52,211,153,.4);
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-synthesis-weight: none;
+  letter-spacing: -0.006em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+/* Faint coral radial glow so the dark UI reads as lit, not flat. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 60% at 50% -12%, rgba(255,90,54,.20), rgba(255,90,54,0) 62%),
+    radial-gradient(70% 45% at 88% 6%, rgba(255,176,32,.08), rgba(255,176,32,0) 60%),
+    radial-gradient(120% 80% at 50% 120%, rgba(110,168,254,.06), rgba(110,168,254,0) 55%);
+}
+button { font-family: inherit; }
+/* Tabular numerals for anything that counts (rings, days, percentages). */
+.num { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
+
+/* Visible keyboard focus on the dark background. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+button:focus:not(:focus-visible) { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
